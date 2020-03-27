@@ -32,7 +32,7 @@ public class IceAndFireConfig {
     public int glacierSpawnChance = 4;
     public int oreToStoneRatioForDragonCaves = 45;
     public int dragonEggTime = 7200;
-    public int dragonGriefing = 0;
+    public int dragonGriefing = 2;
     public boolean tamedDragonGriefing = true;
     public int dragonFlapNoiseDistance = 4;
     public int dragonFluteDistance = 8;
@@ -41,7 +41,7 @@ public class IceAndFireConfig {
     public double dragonAttackDamageFire = 2;
     public double dragonAttackDamageIce = 2.5;
     public int maxDragonFlight = 128;
-    public int dragonGoldSearchLength = 30;
+    public int dragonGoldSearchLength = 0;
     public boolean canDragonsDespawn = true;
     public boolean doDragonsSleep = true;
     public boolean dragonDigWhenStuck = true;
@@ -49,7 +49,7 @@ public class IceAndFireConfig {
     public boolean dragonDropSkull = true;
     public boolean dragonDropHeart = true;
     public boolean dragonDropBlood = true;
-    public int dragonTargetSearchLength = 128;
+    public int dragonTargetSearchLength = 32;
     public int dragonWanderFromHomeDistance = 40;
     public int dragonHungerTickRate = 3000;
     public boolean spawnHippogryphs = true;
@@ -63,7 +63,7 @@ public class IceAndFireConfig {
     public boolean pixiesStealItems = true;
     public boolean generateCyclopsCaves = true;
     public int spawnCyclopsChance = 170;
-    public int cyclopesSheepSearchLength = 17;
+    public int cyclopesSheepSearchLength = 0;
     public double cyclopsMaxHealth = 150;
     public double cyclopsAttackStrength = 15;
     public double cyclopsBiteStrength = 40;
@@ -76,17 +76,17 @@ public class IceAndFireConfig {
     public int generateSirenChance = 300;
     public boolean spawnHippocampus = true;
     public int hippocampusSpawnChance = 70;
-    public int deathWormTargetSearchLength = 64;
+    public int deathWormTargetSearchLength = 32;
     public double deathWormMaxHealth = 10D;
     public double deathWormAttackStrength = 3D;
     public boolean spawnDeathWorm = true;
     public boolean deathWormAttackMonsters = true;
     public int deathWormSpawnRate = 2;
     public int deathWormSpawnCheckChance = 3;
-    public int cockatriceChickenSearchLength = 32;
+    public int cockatriceChickenSearchLength = 0;
     public int cockatriceEggChance = 30;
     public double cockatriceMaxHealth = 40.0D;
-    public boolean chickensLayRottenEggs = true;
+    public boolean chickensLayRottenEggs = false;
     public boolean spawnCockatrices = true;
     public int cockatriceSpawnRate = 4;
     public int cockatriceSpawnCheckChance = 0;
@@ -105,8 +105,9 @@ public class IceAndFireConfig {
     public boolean trollsDropWeapon = true;
     public double trollMaxHealth = 50;
     public double trollAttackStrength = 10;
-    public boolean villagersFearDragons = true;
-    public boolean animalsFearDragons = true;
+    public boolean sheepFollowCyclops = false;
+    public boolean villagersFearDragons = false;
+    public boolean animalsFearDragons = false;
     public boolean generateMyrmexColonies = true;
     public int myrmexPregnantTicks = 2500;
     public int myrmexEggTicks = 3000;
@@ -117,7 +118,7 @@ public class IceAndFireConfig {
     public boolean experimentalPathFinder;
     public boolean spawnAmphitheres = true;
     public int amphithereSpawnRate = 5;
-    public float amphithereVillagerSearchLength = 64;
+    public float amphithereVillagerSearchLength = 0;
     public int amphithereTameTime = 400;
     public float amphithereFlightSpeed = 1.75F;
     public double amphithereMaxHealth = 50D;
@@ -168,7 +169,7 @@ public class IceAndFireConfig {
         this.spawnStructuresOnSuperflat = config.getBoolean("Generate All Structures on Superflat", "all", true, "Whether to generate structures or mobs on superflat worlds");
         this.dragonBlockBreakingDropChance = config.getFloat("Dragon Block Breaking Drop Chance", "all", 0.1F, 0.0F, 1.0F, "The percentage chance for a block to drop as an item when a dragon breaks it.");
         this.dragonEggTime = config.getInt("Dragon Egg Hatch Time", "all", 7200, 1, Integer.MAX_VALUE, "How long it takes(in ticks) for a dragon egg to hatch");
-        this.dragonGriefing = config.getInt("Dragon Griefing", "all", 0, 0, 2, "Dragon griefing - 2 is no griefing, 1 is breaking weak blocks, 0 is default");
+        this.dragonGriefing = config.getInt("Dragon Griefing", "all", 2, 0, 2, "Dragon griefing - 2 is no griefing, 1 is breaking weak blocks, 0 is default");
         this.tamedDragonGriefing = config.getBoolean("Tamed Dragon Griefing", "all", true, "True if tamed dragons can follow the griefing rules.");
         this.dragonFlapNoiseDistance = config.getInt("Dragon Flap Noise Distance", "all", 4, 0, 10000, "Dragon Flap Noise Distance - Larger number, further away you can hear it");
         this.dragonFluteDistance = config.getInt("Dragon Flute Distance", "all", 4, 0, 10000, "Dragon Flute Distance - how many chunks away is the dragon flute effective?");
@@ -177,19 +178,20 @@ public class IceAndFireConfig {
         this.dragonAttackDamageFire = config.getFloat("Dragon Attack Damage(Fire breath)", "all", 2.0F, 0, 10000, "Damage dealt from a successful fire breath attack. Attack Damage is scaled to by age, so a stage 5 dragon will deal 5x as much as this number");
         this.dragonAttackDamageIce = config.getFloat("Dragon Attack Damage(Ice breath)", "all", 2.5F, 0, 10000, "Damage dealt from a successful ice breath attack. Attack Damage is scaled to by age, so a stage 5 dragon will deal 5x as much as this number");
         this.maxDragonFlight = config.getInt("Max Dragon Flight Height", "all", 128, 100, Integer.MAX_VALUE, "How high dragons can fly, in Y height.");
-        this.dragonGoldSearchLength = config.getInt("Dragon Gold Search Length", "all", 30, 0, 10000, "How far away dragons will detect gold blocks being destroyed or chests being opened");
+        this.dragonGoldSearchLength = config.getInt("Dragon Gold Search Length", "all", 0, 0, 10000, "How far away dragons will detect gold blocks being destroyed or chests being opened");
         this.canDragonsDespawn = config.getBoolean("Dragons Despawn", "all", true, "True if dragons can despawn. Note that if this is false there may be SERIOUS lag issues.");
         this.doDragonsSleep = config.getBoolean("Tamed Dragons Sleep", "all", true, "True if tamed dragons go to sleep at night.");
         this.dragonDigWhenStuck = config.getBoolean("Dragons Dig When Stuck", "all", true, "True if dragons can break blocks if they get stuck. Turn this off if your dragons randomly explode.");
         this.dragonDropSkull = config.getBoolean("Dragons Drop Skull", "all", true, "True if dragons can drop their skull on death.");
         this.dragonDropHeart = config.getBoolean("Dragons Drop Heart", "all", true, "True if dragons can drop their heart on death.");
         this.dragonDropBlood = config.getBoolean("Dragons Drop Blood", "all", true, "True if dragons can drop their blood on death.");
-        this.dragonTargetSearchLength = config.getInt("Dragon Target Search Length", "all", 128, 1, 10000, "How many blocks away can dragons spot potential prey. Note that increasing this could cause lag.");
+        this.dragonTargetSearchLength = config.getInt("Dragon Target Search Length", "all", 32, 1, 10000, "How many blocks away can dragons spot potential prey. Note that increasing this could cause lag.");
         this.dragonWanderFromHomeDistance = config.getInt("Dragon Wander From Home Distance", "all", 40, 1, 10000, "How many blocks away can dragons wander from their defined \"home\" position.");
         this.dragonHungerTickRate = config.getInt("Dragon Hunger Tick Rate", "all", 3000, 1, 10000, "Every interval of this number in ticks, dragon hunger decreases.");
         this.dragonBreakBlockCooldown = config.getInt("Dragon Block Break Cooldown", "all", 5, 0, 10000, "Every interval of this number in ticks, dragon allowed to break blocks.");
-        this.villagersFearDragons = config.getBoolean("Villagers Fear Dragons", "all", true, "True if villagers should run away and hide from dragons and other hostile Ice and Fire mobs.");
-        this.animalsFearDragons = config.getBoolean("Animals Fear Dragons", "all", true, "True if animals should run away and hide from dragons and other hostile Ice and Fire mobs.");
+        this.sheepFollowCyclops = config.getBoolean("Sheep Follow Cyclops", "all", false, "True if sheep should follow cyclops.");
+        this.villagersFearDragons = config.getBoolean("Villagers Fear Dragons", "all", false, "True if villagers should run away and hide from dragons and other hostile Ice and Fire mobs.");
+        this.animalsFearDragons = config.getBoolean("Animals Fear Dragons", "all", false, "True if animals should run away and hide from dragons and other hostile Ice and Fire mobs.");
         this.blacklistedBreakBlocks = config.getStringList("Blacklisted Blocks from Dragon", "all", new String[0], "Blacklist for blocks that dragons are not to break or burn. Ex. \"minecraft:chest\" or \"rats:rat_crafting_table\"");
         this.noDropBreakBlocks = config.getStringList("No-Drop Blocks from Dragon Block Breaking", "all", new String[]{"minecraft:stone", "minecraft:dirt", "minecraft:grass"}, "Blocks that will not drop as items when broken by a dragon. Ex. \"minecraft:chest\" or \"rats:rat_crafting_table\"");
         this.blacklistBreakBlocksIsWhiteList = config.getBoolean("Blacklisted Blocks from Dragon is a Whitelist", "all", false, "If true, then the blacklist will act as a whitelist.");
@@ -211,7 +213,7 @@ public class IceAndFireConfig {
         this.generateCyclopsCaves = config.getBoolean("Spawn Cyclopes", "all", true, "True if cyclops caves are allowed to spawn");
         this.spawnCyclopsChance = config.getInt("Spawn Cyclops Chance", "all", 170, 1, 10000, "1 out of this number chance per chunk for generation");
         this.cyclopsMaxHealth = (double) config.getFloat("Cyclops Max Health", "all", 150, 1, 10000, "Maximum cyclops health");
-        this.cyclopesSheepSearchLength = config.getInt("Cyclopes Sheep Search Length", "all", 17, 1, 10000, "How many blocks away can cyclopes detect sheep. Note that increasing this could cause lag.");
+        this.cyclopesSheepSearchLength = config.getInt("Cyclopes Sheep Search Length", "all", 0, 0, 10000, "How many blocks away can cyclopes detect sheep. Note that increasing this could cause lag.");
         this.cyclopsAttackStrength = (double) config.getFloat("Cyclops Attack Strength", "all", 15, 1, 10000, "Cyclops attack strength");
         this.cyclopsBiteStrength = (double) config.getFloat("Cyclops Bite Strength", "all", 40, 1, 10000, "Amount of damage done with cyclops bite attack.");
         this.cyclopsGriefing = config.getBoolean("Cyclops Griefing", "all", true, "Whether or not cyclops can break logs or leaves in their way");
@@ -226,7 +228,7 @@ public class IceAndFireConfig {
         this.spawnHippocampus = config.getBoolean("Spawn Hippocampus", "all", true, "True if hippocampi are allowed to spawn");
         this.hippocampusSpawnChance = config.getInt("Spawn Hippocampus Chance", "all", 70, 1, 10000, "1 out of this number chance per chunk for generation");
 
-        this.deathWormTargetSearchLength = config.getInt("Death Worm Target Search Length", "all", 64, 1, 10000, "How many blocks away can death worms spot potential prey. Note that increasing this could cause lag");
+        this.deathWormTargetSearchLength = config.getInt("Death Worm Target Search Length", "all", 32, 1, 10000, "How many blocks away can death worms spot potential prey. Note that increasing this could cause lag");
         this.deathWormMaxHealth = (double) config.getFloat("Death Worm Base Health", "all", 10, 1, 10000, "Default deathworm health, this is scaled to the worm's particular size");
         this.deathWormAttackStrength = (double) config.getFloat("Death Worm Base Attack Strength", "all", 3, 1, 10000, "Default deathworm attack strength, this is scaled to the worm's particular size");
         this.spawnDeathWorm = config.getBoolean("Spawn Death Worms", "all", true, "True if deathworms are allowed to spawn");
@@ -235,9 +237,9 @@ public class IceAndFireConfig {
         this.deathWormSpawnCheckChance = config.getInt("Death Worm Spawn Check Chance", "all", 3, 0, 10000, "A double check to see if the game can spawn death worms. Higher number = lower chance to spawn.");
 
         this.cockatriceMaxHealth = (double) config.getFloat("Cockatrice Health", "all", 40, 1, 10000, "Maximum cockatrice health");
-        this.cockatriceChickenSearchLength = config.getInt("Cockatrice chicken Search Length", "all", 32, 1, 10000, "How many blocks away can cockatrices detect chickens. Note that increasing this could cause lag.");
+        this.cockatriceChickenSearchLength = config.getInt("Cockatrice chicken Search Length", "all", 0, 0, 10000, "How many blocks away can cockatrices detect chickens. Note that increasing this could cause lag.");
         this.cockatriceEggChance = config.getInt("Cockatrice chicken Search Length", "all", 30, 1, Integer.MAX_VALUE, "1 out of this number chance per 6000 ticks for a chicken to lay a cockatrice egg.");
-        this.chickensLayRottenEggs = config.getBoolean("Chickens Lay Rotten Eggs", "all", true, "True if chickens lay rotten eggs.");
+        this.chickensLayRottenEggs = config.getBoolean("Chickens Lay Rotten Eggs", "all", false, "True if chickens lay rotten eggs.");
         this.spawnCockatrices = config.getBoolean("Spawn Cockatrices", "all", true, "True if cockatrices are allowed to spawn");
         this.cockatriceSpawnRate = config.getInt("Cockatrice Spawn Weight", "all", 4, 1, 10000, "Cockatrice spawn weight. Lower = lower chance to spawn");
         this.cockatriceSpawnCheckChance = config.getInt("Cockatrice Spawn Check Chance", "all", 0, 0, 10000, "A double check to see if the game can spawn cockatrices. Higher number = lower chance to spawn.");
@@ -271,7 +273,7 @@ public class IceAndFireConfig {
 
         this.spawnAmphitheres = config.getBoolean("Spawn Amphitheres", "all", true, "True if amphitheres are allowed to spawn");
         this.amphithereSpawnRate = config.getInt("Amphithere Spawn Weight", "all", 5, 1, 10000, "Amphithere spawn weight. Lower = lower chance to spawn");
-        this.amphithereVillagerSearchLength = config.getInt("Amphithere Villager Search Length", "all", 64, 1, 10000, "How many blocks away can ampitheres detect villagers being hurt. Note that increasing this could cause lag.");
+        this.amphithereVillagerSearchLength = config.getInt("Amphithere Villager Search Length", "all", 0, 0, 10000, "How many blocks away can ampitheres detect villagers being hurt. Note that increasing this could cause lag.");
         this.amphithereTameTime = config.getInt("Amphithere Tame Time", "all", 400, 1, 10000, "How many ticks it takes while riding an untamed amphithere to tame it.");
         this.amphithereFlightSpeed = config.getFloat("Amphithere Flight Speed", "all", 1.75F, 0.0F, 3.0F, "How fast amphitheres fly.");
         this.amphithereMaxHealth = (double) config.getFloat("Amphithere Max Health", "all", 50, 1, 10000, "Maximum amphithere health");

@@ -104,7 +104,7 @@ public class IceAndFire {
         TAB_ITEMS = new CreativeTab(MODID + "_items");
         TAB_BLOCKS = new CreativeTab(MODID + "_blocks");
         ModEntities.init();
-        ModWorld.init();
+        //ModWorld.init(); no
         MinecraftForge.EVENT_BUS.register(PROXY);
         logger.info("A raven flies from the north to the sea");
         logger.info("A dragon whispers her name in the east");

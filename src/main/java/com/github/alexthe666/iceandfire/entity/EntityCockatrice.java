@@ -586,6 +586,9 @@ public class EntityCockatrice extends EntityTameable implements IAnimatedEntity,
             return 0;
         }
         float dist = IceAndFire.CONFIG.cockatriceChickenSearchLength;
+        if (dist == 0) {
+            return 0;
+        }
         List<EntityCockatrice> list = world.getEntitiesWithinAABB(EntityCockatrice.class, this.getEntityBoundingBox().expand(dist, dist, dist));
         int i = 0;
         for (EntityCockatrice cockatrice : list) {

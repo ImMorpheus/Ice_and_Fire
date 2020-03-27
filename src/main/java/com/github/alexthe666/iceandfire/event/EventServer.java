@@ -326,10 +326,10 @@ public class EventServer {
             if (properties != null && properties.inLoveTicks > 0) {
                 event.setCanceled(true);
             }
-            if (isAnimaniaChicken(event.getEntityLiving()) && attacker instanceof EntityLivingBase) {
+            if (IceAndFire.CONFIG.cockatriceChickenSearchLength != 0 && isAnimaniaChicken(event.getEntityLiving()) && attacker instanceof EntityLivingBase) {
                 signalChickenAlarm(event.getEntityLiving(), (EntityLivingBase) attacker);
             }
-            if (DragonUtils.isVillager(event.getEntityLiving()) && attacker instanceof EntityLivingBase) {
+            if (IceAndFire.CONFIG.amphithereVillagerSearchLength != 0 && DragonUtils.isVillager(event.getEntityLiving()) && attacker instanceof EntityLivingBase) {
                 signalAmphithereAlarm(event.getEntityLiving(), (EntityLivingBase) attacker);
             }
 
@@ -341,19 +341,23 @@ public class EventServer {
     public void onLivingSetTarget(LivingSetAttackTargetEvent event) {
         if (event.getTarget() != null) {
             EntityLivingBase attacker = event.getEntityLiving();
-            if (isAnimaniaChicken(event.getTarget())) {
-                signalChickenAlarm(event.getTarget(), attacker);
+            if (IceAndFire.CONFIG.cockatriceChickenSearchLength != 0) {
+                if (isAnimaniaChicken(event.getTarget())) {
+                    signalChickenAlarm(event.getTarget(), attacker);
+                }
             }
-            if (DragonUtils.isVillager(event.getTarget())) {
-                signalAmphithereAlarm(event.getTarget(), attacker);
+            if (IceAndFire.CONFIG.amphithereVillagerSearchLength != 0) {
+                if (DragonUtils.isVillager(event.getTarget())) {
+                    signalAmphithereAlarm(event.getTarget(), attacker);
+                }
             }
         }
     }
 
     @SubscribeEvent
     public void onPlayerAttack(AttackEntityEvent event) {
-        if (event.getTarget() != null && isAnimaniaSheep(event.getTarget())) {
-            float dist = IceAndFire.CONFIG.cyclopesSheepSearchLength;
+        float dist = IceAndFire.CONFIG.cyclopesSheepSearchLength;
+        if (dist != 0 && event.getTarget() != null && isAnimaniaSheep(event.getTarget())) {
             List<Entity> list = event.getTarget().world.getEntitiesWithinAABBExcludingEntity(event.getEntityPlayer(), event.getEntityPlayer().getEntityBoundingBox().expand(dist, dist, dist));
             Collections.sort(list, new EntityAINearestAttackableTarget.Sorter(event.getEntityPlayer()));
             if (!list.isEmpty()) {
@@ -755,8 +759,11 @@ public class EventServer {
 
     @SubscribeEvent
     public void onPlayerRightClick(PlayerInteractEvent.RightClickBlock event) {
+        float dist = IceAndFire.CONFIG.dragonGoldSearchLength;
+        if (dist == 0) {
+            return;
+        }
         if (event.getEntityPlayer() != null && (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockChest)) {
-            float dist = IceAndFire.CONFIG.dragonGoldSearchLength;
             List<Entity> list = event.getWorld().getEntitiesWithinAABBExcludingEntity(event.getEntityPlayer(), event.getEntityPlayer().getEntityBoundingBox().expand(dist, dist, dist));
             if (!list.isEmpty()) {
                 Iterator<Entity> itr = list.iterator();
@@ -780,8 +787,11 @@ public class EventServer {
 
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
+        float dist = IceAndFire.CONFIG.dragonGoldSearchLength;
+        if (dist == 0) {
+            return;
+        }
         if (event.getPlayer() != null && (event.getState().getBlock() instanceof BlockChest || event.getState().getBlock() == ModBlocks.goldPile || event.getState().getBlock() == ModBlocks.silverPile)) {
-            float dist = IceAndFire.CONFIG.dragonGoldSearchLength;
             List<Entity> list = event.getWorld().getEntitiesWithinAABBExcludingEntity(event.getPlayer(), event.getPlayer().getEntityBoundingBox().expand(dist, dist, dist));
             if (!list.isEmpty()) {
                 Iterator<Entity> itr = list.iterator();
@@ -855,15 +865,15 @@ public class EventServer {
                     IceAndFire.logger.warn("could not instantiate chain properties for " + event.getEntity().getName());
                 }
             }
-            if (event.getEntity() != null && isAnimaniaSheep(event.getEntity()) && event.getEntity() instanceof EntityAnimal) {
+            if (IceAndFire.CONFIG.sheepFollowCyclops && event.getEntity() != null && isAnimaniaSheep(event.getEntity()) && event.getEntity() instanceof EntityAnimal) {
                 EntityAnimal animal = (EntityAnimal) event.getEntity();
                 animal.tasks.addTask(8, new EntitySheepAIFollowCyclops(animal, 1.2D));
             }
-            if (event.getEntity() != null && isVillager(event.getEntity()) && event.getEntity() instanceof EntityCreature && IceAndFire.CONFIG.villagersFearDragons) {
+            if (IceAndFire.CONFIG.villagersFearDragons && event.getEntity() != null && isVillager(event.getEntity()) && event.getEntity() instanceof EntityCreature) {
                 EntityCreature villager = (EntityCreature) event.getEntity();
                 villager.tasks.addTask(1, new VillagerAIFearUntamed(villager, EntityLivingBase.class, VILLAGER_FEAR, 12.0F, 0.8D, 0.8D));
             }
-            if (event.getEntity() != null && isLivestock(event.getEntity()) && event.getEntity() instanceof EntityCreature && IceAndFire.CONFIG.animalsFearDragons) {
+            if (IceAndFire.CONFIG.animalsFearDragons && event.getEntity() != null && isLivestock(event.getEntity()) && event.getEntity() instanceof EntityCreature) {
                 EntityCreature animal = (EntityCreature) event.getEntity();
                 animal.tasks.addTask(1, new VillagerAIFearUntamed(animal, EntityLivingBase.class, new Predicate<EntityLivingBase>() {
                     public boolean apply(@Nullable EntityLivingBase entity) {
